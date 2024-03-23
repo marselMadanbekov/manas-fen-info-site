@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Бүтүрүүчүлөр</title>
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/main_styles.css">
+    <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <div th:replace="~{admin/layout/layouts::sidebar}"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row mb-3">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold ">Бүтүрүүчү кошуу</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="forms-sample" enctype="multipart/form-data" method="post" th:action="@{/admin/articles/create}">
+                                    <div class="form-group">
+                                        <label for="fullname">Аты-Жөнү</label>
+                                        <input th:value="${payload?.fullname()}" type="text" class="form-control" name="fullname" id="fullname"
+                                               placeholder="Аты-Жөнү" required>
+                                        <label class="text-danger" th:if="${errors?.containsKey('fullname')}"
+                                               th:text="${errors?.get('fullname')}"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subtitle">Сүрөттөмөсу</label>
+                                        <input th:value="${payload?.subtitle()}" type="text" class="form-control" name="subtitle" id="subtitle"
+                                               placeholder="Сүрөттөмөсү">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Сүрөт жүктөө</label>
+                                        <input type="file" name="photo" class="file-upload-default">
+                                        <div class="input-group col-xs-12">
+                                            <input type="text" class="form-control file-upload-info" name="empty" disabled
+                                                   placeholder="Сүрөт жүктөө">
+                                            <span class="input-group-append">
+                                                <button class="file-upload-browse btn btn-primary"
+                                                        type="button">Жүктөө</button>
+                                            </span>
+                                        </div>
+                                        <label class="text-danger" th:if="${errors?.containsKey('photo')}"
+                                               th:text="${errors?.get('photo')}"></label>
+                                        <label class="text-danger" th:if="${errors?.containsKey('photoIoError')}"
+                                               th:text="${errors?.get('photoIoError')}"></label>
+                                        <label class="text-danger" th:if="${errors?.containsKey('photoFormatError')}"
+                                               th:text="${errors?.get('photoFormatError')}"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="story">Мазмуну</label>
+                                        <textarea th:text="${payload?.story()}" type="text" class="form-control custom-textarea" name="story" id="story"
+                                                  placeholder="Мазмуну" required></textarea>
+                                        <label class="text-danger" th:if="${errors?.containsKey('story')}"
+                                               th:text="${errors?.get('story')}"></label>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="spinner-border text-primary" role="status" hidden
+                                             id="progress-spinner">
+                                            <span hidden class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mr-2">Создать</button>
+                                    <button class="btn btn-light">Сбросить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script defer src="/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script defer src="/js1/off-canvas.js"></script>
+<script defer src="/js1/hoverable-collapse.js"></script>
+<script defer src="/js1/template.js"></script>
+<script defer src="/js1/file-upload.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#newsForm').submit(function() {
+            $('#progress-spinner').removeAttr('hidden');
+        });
+    });
+</script>
+<!-- endinject -->
+
+</body>
+
+</html>

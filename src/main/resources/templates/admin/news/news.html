@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Жаңылыктар</title>
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/styles/main_styles.css">
+    <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <div th:replace="~{admin/layout/layouts::sidebar}"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row mb-3">
+                    <div class="w-100 d-flex justify-content-between">
+                        <h3 class="font-weight-bold">Жаңылыктар</h3>
+                        <div>
+                            <a class="btn btn-sm btn-primary" href="/admin/news/create" type="button">
+                                Кошуу
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mt-3 stretch-card" th:each="newe:${news}">
+                        <a class="card-link" th:href="@{/admin/news/{newsId}(newsId=${newe.id})}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <img style="width: 100%" th:src="${'/image/' + newe.photo}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div>
+                                            <div>
+                                                <h4 th:text="${newe.title}"></h4>
+                                                <span th:text="${newe.subtitle}"></span>
+                                            </div>
+                                            <div class="mt-3 long-text">
+                                                <p class="notification-text"
+                                                   th:utext="${newe.text.replaceAll('\n','<br>')}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li th:if="${news.number > 0}" class="page-item">
+                                <a class="page-link"
+                                   th:href="'/admin/news?page=0'"><<</a>
+                            </li>
+                            <li th:if="${news.number > 0}" class="page-item">
+                                <a th:text="${news.number}" class="page-link"
+                                   th:href="'/admin/news?page=' + ${news.number - 1}"></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#"
+                                                            th:text="${news.number + 1}"></a>
+                            </li>
+                            <li th:if="${news.number + 1 < news.totalPages}" class="page-item">
+                                <a href="#" class="page-link" th:text="${news.number + 2}"
+                                   th:href="'/admin/news?page=' + ${news.number + 1}"></a>
+                            </li>
+                            <li th:if="${news.number + 2 < news.totalPages}" class="page-item">
+                                <a class="page-link" href="#" th:text="${news.number + 3}"
+                                   th:href="'/admin/news?page=' + ${news.number + 2}"></a>
+                            </li>
+                            <li th:if="${news.number + 1 < news.totalPages}" class="page-item">
+                                <a class="page-link"
+                                   th:href="'/admin/news?page=' + ${news.totalPages - 1}">>></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script defer src="/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script defer src="/js1/off-canvas.js"></script>
+<script defer src="/js1/hoverable-collapse.js"></script>
+<script defer src="/js1/template.js"></script>
+<script defer src="/js1/file-upload.js"></script>
+<!-- endinject -->
+
+</body>
+
+</html>

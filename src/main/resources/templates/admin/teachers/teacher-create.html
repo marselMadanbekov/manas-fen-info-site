@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Мугалимдер</title>
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/main_styles.css">
+    <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <div th:replace="~{admin/layout/layouts::sidebar}"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row mb-3">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold ">Жаңылык кошуу</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="forms-sample" enctype="multipart/form-data" method="post" th:action="@{/admin/teachers/create}">
+                                    <div class="form-group">
+                                        <label for="firstname">Аты</label>
+                                        <input th:value="${payload?.firstname()}" type="text" class="form-control" name="firstname" id="firstname"
+                                               placeholder="Аты" required>
+                                        <label class="text-danger" th:if="${errors?.containsKey('firstname')}"
+                                               th:text="${errors?.get('firstname')}"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastname">Фамилиясы</label>
+                                        <input th:value="${payload?.lastname()}" type="text" class="form-control" name="lastname" id="lastname"
+                                               placeholder="Фамилиясы">
+                                        <label class="text-danger" th:if="${errors?.containsKey('lastname')}"
+                                               th:text="${errors?.get('lastname')}"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="degree">Даражасы</label>
+                                        <input th:value="${payload?.degree()}" type="text" class="form-control" name="degree" id="degree"
+                                               placeholder="Даражасы" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Логин</label>
+                                        <input th:value="${payload?.username()}" type="text" class="form-control" name="username" id="username"
+                                               placeholder="Логин" required>
+                                        <label class="text-danger" th:if="${errors?.containsKey('username')}"
+                                               th:text="${errors?.get('username')}"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Сыр сөз</label>
+                                        <input th:value="${payload?.password()}" type="password" class="form-control" name="password" id="password"
+                                               placeholder="Сыр сөз" required>
+                                        <label class="text-danger" th:if="${errors?.containsKey('password')}"
+                                               th:text="${errors?.get('password')}"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Сүрөт жүктөө</label>
+                                        <input type="file" name="photo" class="file-upload-default">
+                                        <div class="input-group col-xs-12">
+                                            <input type="text" class="form-control file-upload-info" name="empty" disabled
+                                                   placeholder="Сүрөт жүктөө">
+                                            <span class="input-group-append">
+                                                <button class="file-upload-browse btn btn-primary"
+                                                        type="button">Жүктөө</button>
+                                            </span>
+                                        </div>
+                                        <label class="text-danger" th:if="${errors?.containsKey('photo')}"
+                                               th:text="${errors?.get('photo')}"></label>
+                                        <label class="text-danger" th:if="${errors?.containsKey('photoIoError')}"
+                                               th:text="${errors?.get('photoIoError')}"></label>
+                                        <label class="text-danger" th:if="${errors?.containsKey('photoFormatError')}"
+                                               th:text="${errors?.get('photoFormatError')}"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="info">Маалымат</label>
+                                        <textarea th:text="${payload?.info()}" type="text" class="form-control custom-textarea" name="info" id="info"
+                                                  placeholder="Мазмуну" required></textarea>
+                                        <label class="text-danger" th:if="${errors?.containsKey('info')}"
+                                               th:text="${errors?.get('info')}"></label>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="spinner-border text-primary" role="status" hidden
+                                             id="progress-spinner">
+                                            <span hidden class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mr-2">Создать</button>
+                                    <button class="btn btn-light">Сбросить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script defer src="/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script defer src="/js1/off-canvas.js"></script>
+<script defer src="/js1/hoverable-collapse.js"></script>
+<script defer src="/js1/template.js"></script>
+<script defer src="/js1/file-upload.js"></script>
+<!-- endinject -->
+
+</body>
+
+</html>

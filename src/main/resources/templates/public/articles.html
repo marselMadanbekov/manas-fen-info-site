@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course - Courses</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Course Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+    <link href="/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/styles/courses_styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles/news_styles.css">
+
+    <link rel="stylesheet" type="text/css" href="/styles/courses_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+
+    <div th:replace="~{public/layout/layout::mainHeader}"></div>
+
+    <!-- Menu -->
+
+    <div th:replace="~{public/layout/layout::header}"></div>
+
+    <div class="home">
+        <div class="home_background_container prlx_parent">
+            <div class="home_background prlx" style="background-image:url(/images/courses_background.jpg)"></div>
+        </div>
+        <div class="home_content">
+            <h1>Бүтүрүүчүлөр</h1>
+        </div>
+    </div>
+
+    <!-- Popular -->
+
+    <div class="popular page_section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="section_title text-center">
+                        <h1>Ийгиликтүү бүтүрүүчүлөр</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row course_boxes" th:each="article : ${articles}">
+
+                <!-- Popular Course Item -->
+                <div class="col-lg-4 course_box">
+                    <div class="card">
+                        <img class="card-img-top" th:src="'/image/' + ${article.photo}" alt="">
+                        <div class="card-body text-center pb-3">
+                            <div class="card-title"><a th:href="@{/articles/{articleId}(articleId=${article.id})}" th:text="${article.fullName}"></a></div>
+                            <div class="card-text" th:text="${article.subtitle}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="news_page_nav mt-3 w-100">
+                <ul class="d-flex justify-content-center">
+                    <li th:if="${articles.number > 0}" class="text-center trans_200">
+                        <a th:href="'/articles?page=0'"><<</a>
+                    </li>
+                    <li th:if="${articles.number > 0}" class="text-center trans_200">
+                        <a th:text="${articles.number}"
+                           th:href="'/articles?page=' + ${articles.number - 1}"></a>
+                    </li>
+                    <li class="text-center trans_200 active"><a href="#"
+                                                                th:text="${articles.number + 1}"></a>
+                    </li>
+                    <li th:if="${articles.number + 1 < articles.totalPages}" class="text-center trans_200">
+                        <a href="#" th:text="${articles.number + 2}"
+                           th:href="'/articles?page=' + ${articles.number + 1}"></a>
+                    </li>
+                    <li th:if="${articles.number + 2 < articles.totalPages}" class="text-center trans_200">
+                        <a href="#" th:text="${articles.number + 3}"
+                           th:href="'/articles?page=' + ${articles.number + 2}"></a>
+                    </li>
+                    <li th:if="${articles.number + 1 < articles.totalPages}" class="text-center trans_200">
+                        <a th:href="'/articles?page=' + ${articles.totalPages - 1}">>></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:replace="~{public/layout/layout::footer}"></div>
+
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/plugins/greensock/TweenMax.min.js"></script>
+<script src="/plugins/greensock/TimelineMax.min.js"></script>
+<script src="/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="/plugins/greensock/animation.gsap.min.js"></script>
+<script src="/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="/plugins/scrollTo/jquery.scrollTo.min.js"></script>
+<script src="/plugins/easing/easing.js"></script>
+<script src="/js/courses_custom.js"></script>
+
+</body>
+</html>

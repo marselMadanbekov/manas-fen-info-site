@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: manas-fen
+  datasource:
+    url: jdbc:postgresql://localhost:5432/manas
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: madanbekovmarsel
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8080
+
+custom:
+  parameters:
+    teachers:
+      page-size: 10
+      photo:
+        width: 690
+        height: 520
+    articles:
+      page-size: 10
+      photo:
+        width: 690
+        height: 520
+    links:
+      page-size: 10
+      photo:
+        width: 1920
+        height: 1080
+    news:
+      page-size: 10
+      photo:
+        width: 1920
+        height: 1080
+    upload-photo-directory: /development/manas-fen/images/
+

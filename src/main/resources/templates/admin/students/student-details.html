@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Студенттер</title>
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/main_styles.css">
+    <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <div th:replace="~{admin/layout/layouts::sidebar}"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <h3>Студент</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 stretch-card mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <td>Аты-Жөнү</td>
+                                            <td th:text="${student.firstname +' ' + student.lastname}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td th:text="${student.email}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Логин</td>
+                                            <td th:text="${student.username}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Статус</td>
+                                            <td>
+                                                <label class="badge badge-success"
+                                                       th:if="${student.active}">Активен</label>
+                                                <label class="badge badge-secondary"
+                                                       th:if="${!student.active}">Не активен</label>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script defer src="/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script defer src="/js1/off-canvas.js"></script>
+<script defer src="/js1/hoverable-collapse.js"></script>
+<script defer src="/js1/template.js"></script>
+<script defer src="/js1/file-upload.js"></script>
+<!-- endinject -->
+
+</body>
+
+</html>

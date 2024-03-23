@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Мугалимдер</title>
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/styles/main_styles.css">
+    <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+<div class="container-scroller">
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <div class="container-fluid page-body-wrapper">
+        <div th:replace="~{admin/layout/layouts::sidebar}"></div>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row mb-3">
+                    <div class="w-100 d-flex justify-content-between">
+                        <h3 class="font-weight-bold">Мугалимдер</h3>
+                        <div>
+                            <a class="btn btn-sm btn-primary" href="/admin/teachers/create" type="button">
+                                Кошуу
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                Аты
+                                            </th>
+                                            <th>
+                                                Фамилиясы
+                                            </th>
+                                            <th>
+                                                Даражасы
+                                            </th>
+                                            <th>
+                                                Статус
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="teacher: ${teachers}">
+
+                                            <td>
+                                                <a class="w-100 nav-link" th:href="@{/admin/teachers/{teacherId}(teacherId=${teacher.id})}">
+                                                    <span th:text="${teacher.userInfo.firstname}"></span>
+                                                </a>
+                                            </td>
+                                            <td th:text="${teacher.userInfo.lastname}"></td>
+                                            <td th:text="${teacher.degree}"></td>
+                                            <td>
+                                                <label class="badge badge-success"
+                                                       th:if="${teacher.userInfo.active}">Активен</label>
+                                                <label class="badge badge-secondary"
+                                                       th:if="${!teacher.userInfo.active}">Не активен</label>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li th:if="${teachers.number > 0}" class="page-item">
+                                <a class="page-link"
+                                   th:href="'/admin/teachers?page=0'"><<</a>
+                            </li>
+                            <li th:if="${teachers.number > 0}" class="page-item">
+                                <a th:text="${teachers.number}" class="page-link"
+                                   th:href="'/admin/teachers?page=' + ${teachers.number - 1}"></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#"
+                                                            th:text="${teachers.number + 1}"></a>
+                            </li>
+                            <li th:if="${teachers.number + 1 < teachers.totalPages}" class="page-item">
+                                <a href="#" class="page-link" th:text="${teachers.number + 2}"
+                                   th:href="'/admin/teachers?page=' + ${teachers.number + 1}"></a>
+                            </li>
+                            <li th:if="${teachers.number + 2 < teachers.totalPages}" class="page-item">
+                                <a class="page-link" href="#" th:text="${teachers.number + 3}"
+                                   th:href="'/admin/teachers?page=' + ${teachers.number + 2}"></a>
+                            </li>
+                            <li th:if="${teachers.number + 1 < teachers.totalPages}" class="page-item">
+                                <a class="page-link"
+                                   th:href="'/admin/teachers?page=' + ${teachers.totalPages - 1}">>></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+        </div>
+    </div>
+</div>
+<script defer src="/vendors/js/vendor.bundle.base.js"></script>
+<script defer src="/js1/off-canvas.js"></script>
+<script defer src="/js1/hoverable-collapse.js"></script>
+<script defer src="/js1/template.js"></script>
+<script defer src="/js1/file-upload.js"></script>
+</body>
+
+</html>
