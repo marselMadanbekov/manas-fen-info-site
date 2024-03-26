@@ -2,9 +2,11 @@ package com.example.manasfen.controllers.user;
 
 import com.example.manasfen.model.entyties.News;
 import com.example.manasfen.model.entyties.StudentsArticle;
+import com.example.manasfen.model.entyties.Survey;
 import com.example.manasfen.model.entyties.UsefulLink;
 import com.example.manasfen.services.articles.ArticlesService;
 import com.example.manasfen.services.news.NewsService;
+import com.example.manasfen.services.surveys.SurveysService;
 import com.example.manasfen.services.usefullinks.LinksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,12 +26,15 @@ public class PublicLinksController {
 
     private final ArticlesService articleService;
     private final LinksService linksService;
+    private final SurveysService surveysService;
 
     @GetMapping()
     public String links(@RequestParam(value = "page", defaultValue = "0") Integer page,
                         Model model) {
         Page<UsefulLink> links = linksService.findAllByPage(page);
         List<StudentsArticle> articles = articleService.getLastArticles();
+        List<Survey> surveys = surveysService.getLastSurveys();
+        model.addAttribute("surveys", surveys);
         model.addAttribute("links", links);
         model.addAttribute("articles", articles);
         return "public/links";
@@ -40,6 +45,9 @@ public class PublicLinksController {
                               Model model) {
         UsefulLink usefulLink = linksService.findById(linkId);
         List<StudentsArticle> articles = articleService.getLastArticles();
+
+        List<Survey> surveys = surveysService.getLastSurveys();
+        model.addAttribute("surveys", surveys);
         model.addAttribute("link", usefulLink);
         model.addAttribute("articles", articles);
 

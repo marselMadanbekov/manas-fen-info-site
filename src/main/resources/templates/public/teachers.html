@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Course - Teachers</title>
+    <title>Манас</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Course Project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
-    <link href="/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/styles/teachers_styles.css">
-    <link rel="stylesheet" type="text/css" href="/styles/teachers_responsive.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/bootstrap4/bootstrap.min.css">
+    <link href="/static/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/teachers_styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/teachers_responsive.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 
     <div class="home">
         <div class="home_background_container prlx_parent">
-            <div class="home_background prlx" style="background-image:url(/images/teachers_background.jpg)"></div>
+            <div class="home_background prlx" style="background-image:url(/static/images/teachers_background.jpg)"></div>
         </div>
         <div class="home_content">
             <h1>Мугалимдер</h1>
@@ -37,7 +37,7 @@
                 <div class="col-lg-4 teacher" th:each="teacher : ${teachers}">
                     <div class="card">
                         <div class="card_img">
-                            <div class="card_plus trans_200 text-center"><a href="#">Опросы</a></div>
+                            <div class="card_plus trans_200 text-center"><a th:href="@{/teachers/{teacherId}(teacherId=${teacher.id})}">+</a></div>
                             <img class="card-img-top trans_200" th:src="'/image/' + ${teacher.photo}" alt="">
                         </div>
                         <div class="card-body text-center">
@@ -47,7 +47,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -55,7 +54,7 @@
     <!-- Milestones -->
 
     <div class="milestones">
-        <div class="milestones_background" style="background-image:url(/images/milestones_background.jpg)"></div>
+        <div class="milestones_background" style="background-image:url(/static/images/milestones_background.jpg)"></div>
 
         <div class="container">
             <div class="row">
@@ -63,7 +62,7 @@
                 <!-- Milestone -->
                 <div class="col-lg-3 milestone_col">
                     <div class="milestone text-center">
-                        <div class="milestone_icon"><img src="/images/milestone_1.svg"
+                        <div class="milestone_icon"><img src="/static/images/milestone_1.svg"
                                                          alt="https://www.flaticon.com/authors/zlatko-najdenovski">
                         </div>
                         <div class="milestone_counter" data-end-value="6150">0</div>
@@ -74,7 +73,7 @@
                 <!-- Milestone -->
                 <div class="col-lg-3 milestone_col">
                     <div class="milestone text-center">
-                        <div class="milestone_icon"><img src="/images/milestone_2.svg"
+                        <div class="milestone_icon"><img src="/static/images/milestone_2.svg"
                                                          alt="https://www.flaticon.com/authors/zlatko-najdenovski">
                         </div>
                         <div class="milestone_counter" data-end-value="486">0</div>
@@ -85,7 +84,7 @@
                 <!-- Milestone -->
                 <div class="col-lg-3 milestone_col">
                     <div class="milestone text-center">
-                        <div class="milestone_icon"><img src="/images/milestone_3.svg"
+                        <div class="milestone_icon"><img src="/static/images/milestone_3.svg"
                                                          alt="https://www.flaticon.com/authors/zlatko-najdenovski">
                         </div>
                         <div class="milestone_counter" data-end-value="11">0</div>
@@ -96,7 +95,7 @@
                 <!-- Milestone -->
                 <div class="col-lg-3 milestone_col">
                     <div class="milestone text-center">
-                        <div class="milestone_icon"><img src="/images/milestone_4.svg"
+                        <div class="milestone_icon"><img src="/static/images/milestone_4.svg"
                                                          alt="https://www.flaticon.com/authors/zlatko-najdenovski">
                         </div>
                         <div class="milestone_counter" data-end-value="12382" data-sign-before="+">0</div>
@@ -131,7 +130,7 @@
 
                 <div class="col-lg-6 order-1 order-lg-2">
                     <div class="become_image">
-                        <img src="/images/become.jpg" alt="">
+                        <img src="/static/images/become.jpg" alt="">
                     </div>
                 </div>
 
@@ -142,17 +141,17 @@
     <div th:replace="~{public/layout/layout::footer}"></div>
 </div>
 
-<script src="/js/jquery-3.2.1.min.js"></script>
-<script src="/styles/bootstrap4/popper.js"></script>
-<script src="/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="/plugins/greensock/TweenMax.min.js"></script>
-<script src="/plugins/greensock/TimelineMax.min.js"></script>
-<script src="/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="/plugins/greensock/animation.gsap.min.js"></script>
-<script src="/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="/plugins/scrollTo/jquery.scrollTo.min.js"></script>
-<script src="/plugins/easing/easing.js"></script>
-<script src="/js/teachers_custom.js"></script>
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+<script src="/static/styles/bootstrap4/popper.js"></script>
+<script src="/static/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/static/plugins/greensock/TweenMax.min.js"></script>
+<script src="/static/plugins/greensock/TimelineMax.min.js"></script>
+<script src="/static/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="/static/plugins/greensock/animation.gsap.min.js"></script>
+<script src="/static/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="/static/plugins/scrollTo/jquery.scrollTo.min.js"></script>
+<script src="/static/plugins/easing/easing.js"></script>
+<script src="/static/js/teachers_custom.js"></script>
 
 </body>
 </html>

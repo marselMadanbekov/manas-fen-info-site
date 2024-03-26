@@ -1,6 +1,7 @@
 package com.example.manasfen.services.users;
 
 import com.example.manasfen.exceptions.InvalidDataFormatException;
+import com.example.manasfen.model.entyties.Survey;
 import com.example.manasfen.model.entyties.Teacher;
 import com.example.manasfen.model.entyties.UsefulLink;
 import com.example.manasfen.model.entyties.User;
@@ -26,4 +27,10 @@ public interface UsersService {
     User createUser(UserCreate linksCreate);
 
     List<Teacher> getLastTeachers();
+
+    List<Teacher> findAllTeachersNotInSurvey(Survey survey);
+
+    List<Teacher> findAllTeachersByIds(List<Long> teacherIds);
+
+    User findUserByUsername(String name);
 }

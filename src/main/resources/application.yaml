@@ -1,4 +1,8 @@
 spring:
+  security:
+    user:
+      name: marsel
+      password: marsel
   application:
     name: manas-fen
   datasource:
@@ -12,10 +16,17 @@ spring:
     hibernate:
       ddl-auto: update
 server:
-  port: 8080
+  port: 8081
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+
 
 custom:
   parameters:
+    surveys:
+      page-size: 10
     teachers:
       page-size: 10
       photo:
@@ -25,7 +36,7 @@ custom:
       page-size: 10
       photo:
         width: 690
-        height: 520
+        height: 5200
     links:
       page-size: 10
       photo:
@@ -37,4 +48,3 @@ custom:
         width: 1920
         height: 1080
     upload-photo-directory: /development/manas-fen/images/
-

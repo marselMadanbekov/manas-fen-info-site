@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Course</title>
+    <title>Манас</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Course Project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
-    <link href="/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet"
+    <link rel="stylesheet" type="text/css" href="/static/styles/bootstrap4/bootstrap.min.css">
+    <link href="/static/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet"
           type="text/css">
-    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
-    <link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
-    <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="/static/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/responsive.css">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
                 <!-- Hero Slide -->
                 <div class="hero_slide">
                     <div class="hero_slide_background"
-                         style="background-image:url(/images/slider_background.jpg)"></div>
+                         style="background-image:url(/static/images/slider_background.jpg)"></div>
                     <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                         <div class="hero_slide_content text-center">
                             <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Эң сапаттуу <span>Билим</span>
@@ -49,7 +49,7 @@
                 <!-- Hero Slide -->
                 <div class="hero_slide">
                     <div class="hero_slide_background"
-                         style="background-image:url(/images/slider_background.jpg)"></div>
+                         style="background-image:url(/static/images/slider_background.jpg)"></div>
                     <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                         <div class="hero_slide_content text-center">
                             <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut"><span>КТМУ</span>
@@ -61,7 +61,7 @@
                 <!-- Hero Slide -->
                 <div class="hero_slide">
                     <div class="hero_slide_background"
-                         style="background-image:url(/images/slider_background2-1.jpg)"></div>
+                         style="background-image:url(/static/images/slider_background2-1.jpg)"></div>
                     <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                         <div class="hero_slide_content text-center">
                             <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Дүйнөнүн алгачкы
@@ -86,7 +86,7 @@
 
                     <!-- <div class="col-lg-4 hero_box_col">
                         <div class="hero_box d-flex flex-row align-items-center justify-content-start">
-                            <img src="/images/earth-globe.svg" class="svg" alt="">
+                            <img src="/static/images/earth-globe.svg" class="svg" alt="">
                             <div class="hero_box_content">
                                 <h2 class="hero_box_title">Online Courses</h2>
                                 <a href="articles.html" class="hero_box_link">Подробнее</a>
@@ -96,7 +96,7 @@
 
                     <div class="col-lg-6 hero_box_col">
                         <div class="hero_box d-flex flex-row align-items-center justify-content-start">
-                            <img src="/images/books.svg" class="svg" alt="">
+                            <img src="/static/images/books.svg" class="svg" alt="">
                             <div class="hero_box_content">
                                 <h2 class="hero_box_title">Пайдалуу маалымат</h2>
                                 <a href="/links" class="hero_box_link">толугураак</a>
@@ -106,7 +106,7 @@
 
                     <div class="col-lg-6 hero_box_col">
                         <div class="hero_box d-flex flex-row align-items-center justify-content-start">
-                            <img src="/images/professor.svg" class="svg" alt="">
+                            <img src="/static/images/professor.svg" class="svg" alt="">
                             <div class="hero_box_content">
                                 <h2 class="hero_box_title">Мугалимдер</h2>
                                 <a href="/teachers" class="hero_box_link">толугураак</a>
@@ -168,10 +168,10 @@
                 <div class="col-lg-6 nopadding">
                     <div class="search_section d-flex flex-column align-items-center justify-content-center">
                         <div class="search_background"
-                             style="background-image:url(/images/search_background.jpg);"></div>
+                             style="background-image:url(/static/images/search_background.jpg);"></div>
                         <div class="search_content text-center">
                             <h1 class="search_title">Катталуу формасы</h1>
-                            <form id="search_form" class="search_form" method="post" th:action="@{/auth/register}">
+                            <form id="search_form" class="search_form" method="post" th:action="@{/register}">
                                 <input id="firstname" th:value="${session.payload?.firstname()}" name="firstname"
                                        class="input_field search_form_name" type="text"
                                        placeholder="Атыңыз" required="required" data-error="Course name is required.">
@@ -214,7 +214,7 @@
         <!-- <div class="testimonials_background" style="background-image:url(images/testimonials_background.jpg)"></div> -->
         <div class="testimonials_background_container prlx_parent">
             <div class="testimonials_background prlx"
-                 style="background-image:url(/images/group_students.jpg)"></div>
+                 style="background-image:url(/static/images/group_students.jpg)"></div>
         </div>
         <div class="container">
 
@@ -245,7 +245,7 @@
                                         түрдө сунуштайм.</p>
                                     <div class="testimonial_user">
                                         <div class="testimonial_image mx-auto">
-                                            <img src="/images/students1.jpg" alt="">
+                                            <img src="/static/images/students1.jpg" alt="">
                                         </div>
                                         <div class="testimonial_name">Nahide Babasli</div>
                                         <div class="testimonial_title">Бүтүрүүчү</div>
@@ -263,7 +263,7 @@
                                         уникалдуу жана стимулдаштыруучу окуу тажрыйбасын издегендерге сунуштайм.</p>
                                     <div class="testimonial_user">
                                         <div class="testimonial_image mx-auto">
-                                            <img src="/images/students2.jpg" alt="">
+                                            <img src="/static/images/students2.jpg" alt="">
                                         </div>
                                         <div class="testimonial_name">Айжан Мамасадыкова</div>
                                         <div class="testimonial_title">Бүтүрүүчү</div>
@@ -281,7 +281,7 @@
                                         мүмкүнчүлүктөр жана тажрыйбалар үчүн ыраазымын.</p>
                                     <div class="testimonial_user">
                                         <div class="testimonial_image mx-auto">
-                                            <img src="/images/students3.jpg" alt="">
+                                            <img src="/static/images/students3.jpg" alt="">
                                         </div>
                                         <div class="testimonial_name">Айдай Биримкулова</div>
                                         <div class="testimonial_title">Бүтүрүүчү</div>
@@ -355,18 +355,18 @@
     <div th:replace="~{public/layout/layout::footer}"></div>
 </div>
 
-<script src="/js/jquery-3.2.1.min.js"></script>
-<script src="/styles/bootstrap4/popper.js"></script>
-<script src="/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="/plugins/greensock/TweenMax.min.js"></script>
-<script src="/plugins/greensock/TimelineMax.min.js"></script>
-<script src="/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="/plugins/greensock/animation.gsap.min.js"></script>
-<script src="/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="/plugins/scrollTo/jquery.scrollTo.min.js"></script>
-<script src="/plugins/easing/easing.js"></script>
-<script src="/js/custom.js"></script>
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+<script src="/static/styles/bootstrap4/popper.js"></script>
+<script src="/static/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/static/plugins/greensock/TweenMax.min.js"></script>
+<script src="/static/plugins/greensock/TimelineMax.min.js"></script>
+<script src="/static/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="/static/plugins/greensock/animation.gsap.min.js"></script>
+<script src="/static/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="/static/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/static/plugins/scrollTo/jquery.scrollTo.min.js"></script>
+<script src="/static/plugins/easing/easing.js"></script>
+<script src="/static/js/custom.js"></script>
 
 </body>
 </html>

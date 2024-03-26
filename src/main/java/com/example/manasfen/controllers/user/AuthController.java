@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -31,7 +31,7 @@ public class AuthController {
         return "public/login";
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public String register(@Valid UserCreate userCreate,
                            BindingResult bindingResult,
                            HttpSession session) {
@@ -43,10 +43,16 @@ public class AuthController {
 
             return "redirect:/?errors=1#register";
         } else {
-            User user = usersService.createUser(userCreate);
-            session.removeAttribute("payload");
-            session.removeAttribute("errors");
-            return "redirect:/auth/login";
+            try {
+
+                User user = usersService.createUser(userCreate);
+                session.removeAttribute("payload");
+                session.removeAttribute("errors");
+                return "redirect:/login";
+            }catch (Exception e){
+                e.printStackTrace();
+                throw e;
+            }
         }
     }
 }

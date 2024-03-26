@@ -2,6 +2,7 @@ package com.example.manasfen.services.users;
 
 
 import com.example.manasfen.exceptions.InvalidDataFormatException;
+import com.example.manasfen.model.entyties.Survey;
 import com.example.manasfen.model.entyties.Teacher;
 import com.example.manasfen.model.entyties.User;
 import com.example.manasfen.model.enums.Role;
@@ -17,6 +18,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,7 @@ public class UsersServiceImpl implements UsersService {
     private final PhotoService photoService;
     private final TeacherRepository teacherRepository;
 
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
     @Override
@@ -56,7 +59,7 @@ public class UsersServiceImpl implements UsersService {
                 .firstname(teacherCreate.firstname())
                 .lastname(teacherCreate.lastname())
                 .username(teacherCreate.username())
-                .password(teacherCreate.password())
+                .password(passwordEncoder.encode(teacherCreate.password()))
                 .role(Role.ROLE_TEACHER)
                 .active(true)
                 .build());
@@ -88,21 +91,38 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    @Transactional
     public User createUser(UserCreate userCreate) {
 
-        return userRepository.save(User.builder()
-                .firstname(userCreate.firstname())
-                .lastname(userCreate.lastname())
-                .username(userCreate.username())
-                .password(userCreate.password())
-                .email(userCreate.studNum() + "@manas.edu.kg")
-                .active(true)
-                .role(Role.ROLE_STUDENT)
-                .build());
+        return userRepository.save(
+                User.builder()
+                        .firstname(userCreate.firstname())
+                        .lastname(userCreate.lastname())
+                        .username(userCreate.username())
+                        .password(passwordEncoder.encode(userCreate.password()))
+                        .email(userCreate.studNum() + "@manas.edu.kg")
+                        .active(true)
+                        .role(Role.ROLE_STUDENT)
+                        .build());
     }
 
     @Override
     public List<Teacher> getLastTeachers() {
         return teacherRepository.findFirst3ByOrderByCreateDateDesc();
+    }
+
+    @Override
+    public List<Teacher> findAllTeachersNotInSurvey(Survey survey) {
+        return teacherRepository.findAllNotInTargetList(survey.getTargetTeachers());
+    }
+
+    @Override
+    public List<Teacher> findAllTeachersByIds(List<Long> teacherIds) {
+        return teacherRepository.findAllById(teacherIds);
+    }
+
+    @Override
+    public User findUserByUsername(String name) {
+        return userRepository.findUserByUsername(name).orElseThrow(() -> new NoSuchElementException("Колдонуучу табылган жок!"));
     }
 }

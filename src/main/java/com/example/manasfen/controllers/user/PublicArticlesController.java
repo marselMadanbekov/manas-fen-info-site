@@ -1,8 +1,10 @@
 package com.example.manasfen.controllers.user;
 
 import com.example.manasfen.model.entyties.StudentsArticle;
+import com.example.manasfen.model.entyties.Survey;
 import com.example.manasfen.model.entyties.Teacher;
 import com.example.manasfen.services.articles.ArticlesService;
+import com.example.manasfen.services.surveys.SurveysService;
 import com.example.manasfen.services.users.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,7 @@ public class PublicArticlesController {
 
     private final ArticlesService articlesService;
     private final UsersService usersService;
+    private final SurveysService surveysService;
 
     @GetMapping()
     public String articles(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -37,6 +40,9 @@ public class PublicArticlesController {
                                  Model model){
         StudentsArticle article = articlesService.findById(articleId);
         List<Teacher> teachers = usersService.getLastTeachers();
+        List<Survey> surveys = surveysService.getLastSurveys();
+
+        model.addAttribute("surveys", surveys);
         model.addAttribute("article", article);
         model.addAttribute("teachers",teachers);
         return "public/article-details";

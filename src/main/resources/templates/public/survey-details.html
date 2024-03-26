@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Манас</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Course Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/styles/bootstrap4/bootstrap.min.css">
+    <link href="/static/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/news_styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/contact_styles.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/styles/news_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+
+    <div th:replace="~{public/layout/layout::mainHeader}"></div>
+
+    <div th:replace="~{public/layout/layout::header}"></div>
+
+    <div class="home">
+        <div class="home_background_container prlx_parent">
+            <div class="home_background prlx" style="background-image:url(/static/images/news_background.jpg)"></div>
+        </div>
+        <div class="home_content">
+            <h1>Cурамжылоо</h1>
+        </div>
+    </div>
+
+    <!-- News -->
+
+    <div class="news">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="news_posts">
+                        <h2 th:if="${teachers.size() == 0}">Сурамжылоо толтурулган</h2>
+                        <form id="custom-form" th:if="${teachers.size() > 0}">
+                            <input hidden th:value="${survey.id}" id="surveyId">
+                            <h2>Мугалимди танданыз</h2>
+                            <div class="form-group">
+                                <select class="form-control" name="teacherId" id="teacherId">
+                                    <option class="text-dark" th:each="targetTeacher : ${teachers}"
+                                            th:text="${targetTeacher.fullName()}"
+                                            th:value="${targetTeacher.id}"></option>
+                                </select>
+                            </div>
+                            <h3>Суроолор</h3>
+                            <hr>
+                            <div class="news_post" th:each="question,index : ${survey.questions}">
+                                <div class="news_post_top flex-column flex-sm-row w-100">
+                                    <div class="news_post_title_container">
+                                        <div class="d-flex justify-content-center">
+                                            <h2 th:text="${question}"></h2>
+                                        </div>
+                                        <div class="news_post_meta">
+                                            <div class=''>
+                                                <div class="dpx">
+                                                    <input class="form-question" hidden th:value="${question}"
+                                                           th:name="${'q' + index}">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span>Кошулбайм</span>
+                                                        <span>Кошулам</span>
+                                                    </div>
+                                                    <div class='py d-flex justify-content-between'>
+                                                        <div class="d-flex align-items-center">
+                                                            <input type="radio" class="option-input radio"
+                                                                   value="1"
+                                                                   th:name="${index}"/>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" class="option-input1 radio"
+                                                                   value="2"
+                                                                   th:name="${index}"/>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" class="option-input2 radio"
+                                                                   value="3"
+                                                                   th:name="${index}"/>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" class="option-input3 radio"
+                                                                   value="4"
+                                                                   th:name="${index}"/>
+                                                        </div>
+
+                                                        <div>
+
+                                                            <input type="radio" class="option-input4 radio"
+                                                                   value="5"
+                                                                   th:name="${index}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button button_color_1 text-light" type="submit"><a>Аяктоо</a></button>
+                        </form>
+
+                    </div>
+                </div>
+
+                <!-- Sidebar Column -->
+
+                <div class="col-lg-4">
+                    <div class="sidebar">
+
+                        <!-- Archives -->
+                        <div class="sidebar_section">
+                            <div class="sidebar_section_title">
+                                <h3>Тапшырылгандар</h3>
+                            </div>
+                            <ul class="sidebar_list">
+                                <li class="sidebar_list_item" th:each="result : ${surveyResults}"><a
+                                        th:text="${result.targetTeacher.fullName()}"></a></li>
+                            </ul>
+                        </div>
+
+
+                        <div th:replace="~{public/layout/layout::linksSidebar}"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{public/layout/layout::footer}"></div>
+</div>
+
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+<script src="/static/styles/bootstrap4/popper.js"></script>
+<script src="/static/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/static/plugins/greensock/TweenMax.min.js"></script>
+<script src="/static/plugins/greensock/TimelineMax.min.js"></script>
+<script src="/static/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="/static/plugins/greensock/animation.gsap.min.js"></script>
+<script src="/static/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="/static/plugins/scrollTo/jquery.scrollTo.min.js"></script>
+<script src="/static/plugins/easing/easing.js"></script>
+<script src="/static/js/news_custom.js"></script>
+<script src="/static/custom-js/submit-custom-form.js"></script>
+</body>
+</html>

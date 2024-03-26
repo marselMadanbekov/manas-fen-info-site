@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Сурамжылоолор</title>
+    <link rel="stylesheet" href="/static/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/static/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="/static/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="/static/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/static/css/vertical-layout-light/style.css">
+    <!--    <link rel="shortcut icon" href="/static/images/favicon.png"/>-->
+</head>
+
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <div th:replace="~{admin/layout/layouts::sidebar}"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 th:text="${survey.name}"></h3>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 border-right">
+                                        <div class="col-md-12">
+                                            <h5>Жаңы суроо</h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <form method="post" th:action="@{/admin/surveys/create-question}">
+                                                <input hidden name="surveyId" th:value="${survey.id}">
+                                                <div class="form-group">
+                                                    <input name="question" class="form-control" placeholder="Суроо"
+                                                           required>
+                                                    <label class="text-danger"
+                                                           th:if="${errors?.containsKey('quesiton')}"
+                                                           th:text="${errors?.get('question')}"></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" class="form-control btn-primary" value="Кошуу">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-sm table-striped">
+                                                <tbody>
+                                                <tr th:each="question : ${survey.questions}">
+                                                    <td th:text="${question}"></td>
+                                                    <td>
+                                                        <form method="post"
+                                                              th:action="@{/admin/surveys/remove-question}">
+                                                            <input hidden th:value="${survey.id}" name="surveyId">
+                                                            <input hidden th:value="${question}" name="question">
+                                                            <button type="submit" class="badge btn-sm btn-danger">
+                                                                Удалить
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Багытталган Мугалимдер</h4>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4 border-right">
+                                        <div class="col-md-12">
+                                            <h5>Мугалим кошуу</h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <form method="post" th:action="@{/admin/surveys/add-teachers}">
+                                                <input hidden name="surveyId" th:value="${survey.id}">
+                                                <div class="form-group">
+                                                    <select class="js-example-basic-multiple w-100" multiple="multiple"
+                                                            name="teachers" id="teachers">
+                                                        <option th:each="teacher : ${allExistsTeachers}"
+                                                                th:value="${teacher.id}"
+                                                                th:text="${teacher.userInfo.firstname + ' ' + teacher.userInfo.lastname}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" class="form-control btn-primary" value="Кошуу">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Аты-Жөнү</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="teacher : ${survey.targetTeachers}">
+                                                    <td>
+                                                        <a class="nav-link w-100"
+                                                           th:href="${'/admin/surveys/results/' + teacher.id + '/' + survey.id}">
+                                                            <span th:text="${teacher.fullName() + ' (' + teacher.degree + ')'}"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <form method="post"
+                                                              th:action="@{/admin/surveys/remove-teacher}">
+                                                            <input hidden th:value="${survey.id}" name="surveyId">
+                                                            <input hidden th:value="${teacher.id}" name="teacherId">
+                                                            <button type="submit" class="badge btn-sm btn-danger">
+                                                                Удалить
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<script src="/static/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="/static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="/static/vendors/select2/select2.min.js"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="/static/js1/off-canvas.js"></script>
+<script src="/static/js1/hoverable-collapse.js"></script>
+<script src="/static/js1/template.js"></script>
+<script src="/static/js1/settings.js"></script>
+<script src="/static/js1/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="/static/js1/file-upload.js"></script>
+<script src="/static/js1/typeahead.js"></script>
+<script src="/static/js1/select2.js"></script>
+
+</body>
+
+</html>
