@@ -63,7 +63,8 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="button button_color_1 text-center" th:if="${user.role.toString().equals('ROLE_ADMIN')}"><a href="/admin/students">Админ панель</a></div>
+                            <div class="button button_color_1 text-center" th:if="${user.role.toString().equals('ROLE_ADMIN')}"><a href="/admin/news">Админ панель</a></div>
+                            <div class="button button_color_1 text-center" th:if="${user.role.toString().equals('ROLE_TEACHER')}"><a href="/teacher/surveys">Админ панель</a></div>
                         </div>
                     </div>
 

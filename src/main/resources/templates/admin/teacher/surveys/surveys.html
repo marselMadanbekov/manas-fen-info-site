@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Сурамжылоолор</title>
+    <link rel="stylesheet" type="text/css" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/feather/feather.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+<div class="container-scroller">
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <div class="container-fluid page-body-wrapper">
+        <div th:replace="~{admin/layout/layouts::teacher-sidebar}"></div>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row mb-3">
+                    <div class="w-100 d-flex justify-content-between">
+                        <h3 class="font-weight-bold">Сурамжылоолор</h3>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                #
+                                            </th>
+                                            <th>
+                                                Аты
+                                            </th>
+                                            <th>
+                                                Суроолор
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="survey: ${surveys}">
+
+                                            <td th:text="${survey.id}"></td>
+                                            <td>
+                                                <a class="w-100 nav-link" th:href="@{/teacher/surveys/results/{surveyId}(surveyId=${survey.id})}">
+                                                    <span th:text="${survey.name}"></span>
+                                                </a>
+                                            </td>
+                                            <td th:text="${survey.questions.size()}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li th:if="${surveys.number > 0}" class="page-item">
+                                <a class="page-link"
+                                   th:href="'/teacher/surveys?page=0'"><<</a>
+                            </li>
+                            <li th:if="${surveys.number > 0}" class="page-item">
+                                <a th:text="${surveys.number}" class="page-link"
+                                   th:href="'/teacher/surveys?page=' + ${surveys.number - 1}"></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#"
+                                                            th:text="${surveys.number + 1}"></a>
+                            </li>
+                            <li th:if="${surveys.number + 1 < surveys.totalPages}" class="page-item">
+                                <a href="#" class="page-link" th:text="${surveys.number + 2}"
+                                   th:href="'/teacher/surveys?page=' + ${surveys.number + 1}"></a>
+                            </li>
+                            <li th:if="${surveys.number + 2 < surveys.totalPages}" class="page-item">
+                                <a class="page-link" href="#" th:text="${surveys.number + 3}"
+                                   th:href="'/teacher/surveys?page=' + ${surveys.number + 2}"></a>
+                            </li>
+                            <li th:if="${surveys.number + 1 < surveys.totalPages}" class="page-item">
+                                <a class="page-link"
+                                   th:href="'/teacher/surveys?page=' + ${surveys.totalPages - 1}">>></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+        </div>
+    </div>
+</div>
+<script defer src="/static/vendors/js/vendor.bundle.base.js"></script>
+<script defer src="/static/js1/off-canvas.js"></script>
+<script defer src="/static/js1/hoverable-collapse.js"></script>
+<script defer src="/static/js1/template.js"></script>
+<script defer src="/static/js1/file-upload.js"></script>
+</body>
+
+</html>

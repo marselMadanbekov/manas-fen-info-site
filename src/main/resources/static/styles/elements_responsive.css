@@ -47,11 +47,11 @@
 {
 	.header
 	{
-		width: 1200px;
+		width: 100%;
 	}
 	.header_content
 	{
-		width: calc(100% - 219px);
+		width: 100%;
 	}
 	.main_nav_container
 	{

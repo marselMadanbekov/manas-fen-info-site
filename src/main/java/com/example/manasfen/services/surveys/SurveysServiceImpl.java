@@ -172,4 +172,44 @@ public class SurveysServiceImpl implements SurveysService {
     public List<SurveyResult> findSurveyResultsByTeacherAndSurvey(Teacher teacher, Survey survey) {
         return surveyResultRepository.findByTargetTeacherAndSurvey(teacher, survey);
     }
+
+    @Override
+    public Page<Survey> findAllByPageAndTeacherUsername(Integer page, String name) {
+        User user = usersService.findUserByUsername(name);
+        Teacher teacher = usersService.findTeacherByUserInfo(user);
+        Pageable pageable = PageRequest.of(page,pageSize);
+
+        return surveyRepository.findByTargetTeachers(teacher,pageable);
+    }
+
+    @Override
+    public Map<String, Integer> getSurveyStatisticsByTeacherUsernameAndSurveyId(String name, Long surveyId) {
+        User user = usersService.findUserByUsername(name);
+
+        Teacher teacher = usersService.findTeacherByUserInfo(user);
+        Survey survey = findById(surveyId);
+
+        List<SurveyResult> results = findSurveyResultsByTeacherAndSurvey(teacher, survey);
+
+
+        Map<String, Integer> statsPairs = new HashMap<>();
+
+        for (String question : survey.getQuestions()) {
+            for (int i = 1; i < 6; i++) {
+                statsPairs.put(question + i, 0);
+            }
+        }
+
+        for (SurveyResult result : results) {
+
+            for (String question : result.getMarks().keySet()) {
+
+                if (statsPairs.containsKey(question+result.getMarks().get(question))) {
+                    statsPairs.put(question+result.getMarks().get(question), statsPairs.get(question+result.getMarks().get(question)) + 1);
+                }
+            }
+        }
+
+        return statsPairs;
+    }
 }

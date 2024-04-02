@@ -39,4 +39,8 @@ public interface SurveysService {
     Map<String, Integer> getSurveyStatisticsByTeacherIdAndSurveyId(Long teacherId, Long surveyId);
 
     List<SurveyResult> findSurveyResultsByTeacherAndSurvey(Teacher teacher, Survey survey);
+
+    Page<Survey> findAllByPageAndTeacherUsername(Integer page, String name);
+
+    Map<String, Integer> getSurveyStatisticsByTeacherUsernameAndSurveyId(String name, Long surveyId);
 }

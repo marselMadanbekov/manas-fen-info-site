@@ -44,10 +44,10 @@
                 </div>
             </div>
 
-            <div class="row course_boxes" th:each="article : ${articles}">
+            <div class="row course_boxes" >
 
                 <!-- Popular Course Item -->
-                <div class="col-lg-4 course_box">
+                <div class="col-lg-4 course_box" th:each="article : ${articles}">
                     <div class="card">
                         <img class="card-img-top" th:src="'/image/' + ${article.photo}" alt="">
                         <div class="card-body text-center pb-3">
@@ -56,32 +56,33 @@
                         </div>
                     </div>
                 </div>
+                <div class="news_page_nav mt-3 w-100">
+                    <ul class="d-flex justify-content-center">
+                        <li th:if="${articles.number > 0}" class="text-center trans_200">
+                            <a th:href="'/articles?page=0'"><<</a>
+                        </li>
+                        <li th:if="${articles.number > 0}" class="text-center trans_200">
+                            <a th:text="${articles.number}"
+                               th:href="'/articles?page=' + ${articles.number - 1}"></a>
+                        </li>
+                        <li class="text-center trans_200 active"><a href="#"
+                                                                    th:text="${articles.number + 1}"></a>
+                        </li>
+                        <li th:if="${articles.number + 1 < articles.totalPages}" class="text-center trans_200">
+                            <a href="#" th:text="${articles.number + 2}"
+                               th:href="'/articles?page=' + ${articles.number + 1}"></a>
+                        </li>
+                        <li th:if="${articles.number + 2 < articles.totalPages}" class="text-center trans_200">
+                            <a href="#" th:text="${articles.number + 3}"
+                               th:href="'/articles?page=' + ${articles.number + 2}"></a>
+                        </li>
+                        <li th:if="${articles.number + 1 < articles.totalPages}" class="text-center trans_200">
+                            <a th:href="'/articles?page=' + ${articles.totalPages - 1}">>></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="news_page_nav mt-3 w-100">
-                <ul class="d-flex justify-content-center">
-                    <li th:if="${articles.number > 0}" class="text-center trans_200">
-                        <a th:href="'/articles?page=0'"><<</a>
-                    </li>
-                    <li th:if="${articles.number > 0}" class="text-center trans_200">
-                        <a th:text="${articles.number}"
-                           th:href="'/articles?page=' + ${articles.number - 1}"></a>
-                    </li>
-                    <li class="text-center trans_200 active"><a href="#"
-                                                                th:text="${articles.number + 1}"></a>
-                    </li>
-                    <li th:if="${articles.number + 1 < articles.totalPages}" class="text-center trans_200">
-                        <a href="#" th:text="${articles.number + 2}"
-                           th:href="'/articles?page=' + ${articles.number + 1}"></a>
-                    </li>
-                    <li th:if="${articles.number + 2 < articles.totalPages}" class="text-center trans_200">
-                        <a href="#" th:text="${articles.number + 3}"
-                           th:href="'/articles?page=' + ${articles.number + 2}"></a>
-                    </li>
-                    <li th:if="${articles.number + 1 < articles.totalPages}" class="text-center trans_200">
-                        <a th:href="'/articles?page=' + ${articles.totalPages - 1}">>></a>
-                    </li>
-                </ul>
-            </div>
+
         </div>
 
     </div>

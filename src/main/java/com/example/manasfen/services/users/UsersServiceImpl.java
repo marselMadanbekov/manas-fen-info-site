@@ -125,4 +125,16 @@ public class UsersServiceImpl implements UsersService {
     public User findUserByUsername(String name) {
         return userRepository.findUserByUsername(name).orElseThrow(() -> new NoSuchElementException("Колдонуучу табылган жок!"));
     }
+
+    @Override
+    public Teacher findTeacherByUserInfo(User user) {
+        return teacherRepository.findByUserInfo(user).orElseThrow(() -> new NoSuchElementException("Мугалим табылган жок!"));
+    }
+
+    @Override
+    public Teacher findTeacherByUsername(String name) {
+        User user = findUserByUsername(name);
+
+        return findTeacherByUserInfo(user);
+    }
 }

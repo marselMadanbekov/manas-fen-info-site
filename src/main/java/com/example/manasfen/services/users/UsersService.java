@@ -33,4 +33,8 @@ public interface UsersService {
     List<Teacher> findAllTeachersByIds(List<Long> teacherIds);
 
     User findUserByUsername(String name);
+
+    Teacher findTeacherByUserInfo(User user);
+
+    Teacher findTeacherByUsername(String name);
 }

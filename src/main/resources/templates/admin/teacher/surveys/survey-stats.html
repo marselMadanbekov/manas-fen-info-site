@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Сурамжылоолор</title>
+    <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/js1/select.dataTables.min.css">
+    <link rel="stylesheet" href="/static/css/vertical-layout-light/style.css">
+    <!--    <link rel="shortcut icon" href="/static/images/favicon.png"/>-->
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <div th:replace="~{admin/layout/layouts::header}"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <div th:replace="~{admin/layout/layouts::teacher-sidebar}"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row mb-3">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold"
+                            th:text="'Мугалим: ' + ${teacher.fullName()}"></h3>
+                        <p th:text="'Сурамжылоо: ' + ${survey.name}"></p>
+                    </div>
+                </div>
+
+                <div class="row" th:each="question : ${survey.questions}">
+                    <div class="col-md-12 stretch-card grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                                        <div class="ml-xl-4 mt-3">
+                                            <p class="card-title">Суроонун статистикасы:</p>
+                                            <h2 class="text-primary" th:text="${question}"></h2>
+                                            <p th:text="'Жалпы жооп берүүлөр: ' + ${results.size()}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-xl-9">
+                                        <div class="row">
+<!--                                            -->
+<!--                                            <div class="col-md-6 mt-3">-->
+                                                <canvas class="answers-chart"
+                                                        th:attr="
+                                                        one=${stats.get(question+1)},
+                                                        two=${stats.get(question+2)},
+                                                        three=${stats.get(question+3)},
+                                                        four=${stats.get(question+4)},
+                                                        five=${stats.get(question+5)}"></canvas>
+<!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div th:replace="~{admin/layout/layouts::footer}"></div>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script defer src="/static/vendors/js/vendor.bundle.base.js"></script>
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+
+<script defer src="/static/vendors/chart.js/Chart.min.js"></script>
+<script defer src="/static/js1/off-canvas.js"></script>
+<script defer src="/static/js1/hoverable-collapse.js"></script>
+<script defer src="/static/js1/template.js"></script>
+<script src="/static/custom-js/answers-chart.js"></script>
+
+</body>
+
+</html>
