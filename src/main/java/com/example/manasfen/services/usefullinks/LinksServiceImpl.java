@@ -58,6 +58,11 @@ public class LinksServiceImpl implements LinksService {
     }
 
     @Override
+    public void deleteById(Long linkId) {
+        linksRepository.deleteById(linkId);
+    }
+
+    @Override
     public UsefulLink findById(Long linkId) {
         return linksRepository.findById(linkId).orElseThrow(() -> new NoSuchElementException("Маалымат табылган жок!"));
     }

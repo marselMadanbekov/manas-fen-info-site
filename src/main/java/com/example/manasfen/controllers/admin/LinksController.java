@@ -43,7 +43,11 @@ public class LinksController {
     public String createLinks() {
         return "/admin/links/link-create";
     }
-
+    @PostMapping("/delete/{linkId}")
+    public String deleteSurvey(@PathVariable("linkId") Long linkId){
+        linksService.deleteById(linkId);
+        return "redirect:/admin/links";
+    }
 
     @PostMapping("create")
     public String createLinks(@Valid @ModelAttribute("linksCreate") LinkCreate linksCreate,

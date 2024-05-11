@@ -66,7 +66,11 @@ public class SurveysController {
         model.addAttribute("allExistsTeachers", allTeachers);
         return "admin/surveys/survey-details";
     }
-
+    @PostMapping("/delete/{surveyId}")
+    public String deleteNews(@PathVariable("surveyId") Long surveyId){
+        surveysService.deleteById(surveyId);
+        return "redirect:/admin/surveys";
+    }
     @PostMapping("/create-question")
     public String createQuestion(@Valid QuestionCreate questionCreate,
                                  BindingResult bindingResult,

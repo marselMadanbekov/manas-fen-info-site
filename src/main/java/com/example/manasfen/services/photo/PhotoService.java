@@ -31,7 +31,7 @@ public class PhotoService {
         String extension = StringUtils.getFilenameExtension(originalFilename);
         String separator = File.separator;
 
-        Path filePath = Paths.get("classpath://" +loadPath.replaceAll("/",separator), filename);
+        Path filePath = Paths.get(loadPath, filename);
 
         // Создание директории, если ее нет
         Files.createDirectories(filePath.getParent());

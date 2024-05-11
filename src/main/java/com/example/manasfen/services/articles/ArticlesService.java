@@ -17,4 +17,6 @@ public interface ArticlesService {
     StudentsArticle findById(Long newsId);
 
     List<StudentsArticle> getLastArticles();
+
+    void deleteById(Long articleId);
 }

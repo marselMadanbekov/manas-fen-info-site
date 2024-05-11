@@ -63,4 +63,9 @@ public class NewsServiceImpl implements NewsService{
     public List<News> getLastNews() {
         return newsRepository.findFirst3ByOrderByCreateDateDesc();
     }
+
+    @Override
+    public void deleteById(Long neweId) {
+        newsRepository.deleteById(neweId);
+    }
 }

@@ -16,4 +16,6 @@ public interface LinksService {
     UsefulLink createLink(LinkCreate linksCreate) throws IOException, InvalidDataFormatException;
 
     List<UsefulLink> getLastLinks();
+
+    void deleteById(Long surveyId);
 }

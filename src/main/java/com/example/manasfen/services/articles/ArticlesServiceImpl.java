@@ -60,4 +60,9 @@ public class ArticlesServiceImpl implements ArticlesService {
     public List<StudentsArticle> getLastArticles() {
         return articlesRepository.findFirst3ByOrderByCreateDateDesc();
     }
+
+    @Override
+    public void deleteById(Long articleId) {
+        articlesRepository.deleteById(articleId);
+    }
 }

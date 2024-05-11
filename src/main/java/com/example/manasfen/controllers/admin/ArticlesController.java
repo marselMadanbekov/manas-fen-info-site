@@ -46,6 +46,11 @@ public class ArticlesController {
     }
 
 
+    @PostMapping("/delete/{articleId}")
+    public String deleteArticle(@PathVariable("articleId") Long articleId){
+        articlesService.deleteById(articleId);
+        return "redirect:/admin/articles";
+    }
     @PostMapping("create")
     public String createArticle(@Valid @ModelAttribute("articlesCreate") ArticleCreate articlesCreate,
                                 BindingResult bindingResult,

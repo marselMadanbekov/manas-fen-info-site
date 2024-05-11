@@ -44,7 +44,11 @@ public class NewsController {
         return "/admin/news/news-create";
     }
 
-
+    @PostMapping("/delete/{neweId}")
+    public String deleteNews(@PathVariable("neweId") Long neweId){
+        newsService.deleteById(neweId);
+        return "redirect:/admin/news";
+    }
     @PostMapping("create")
     public String createNews(@Valid @ModelAttribute("newsCreate") NewsCreate newsCreate,
                              BindingResult bindingResult,
