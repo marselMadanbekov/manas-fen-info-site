@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="news_post_text">
-                                <p th:utext="${newe.text.substring(0,150) + '...'}"></p>
+                                <p th:utext="${newe.text + '...'}"></p>
                             </div>
                             <div class="news_post_button text-center trans_200">
                                 <a  th:href="@{/news/{newsId}(newsId=${newe.id})}">Толугураак</a>

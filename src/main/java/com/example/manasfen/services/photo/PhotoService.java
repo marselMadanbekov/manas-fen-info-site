@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -25,26 +26,22 @@ public class PhotoService {
         if (file.isEmpty()) throw new InvalidDataFormatException("Cурот бош боло албайт!");
 
         BufferedImage image = ImageIO.read(file.getInputStream());
-//        double ASPECT_RATIO = (double) photoDimensionHolder.getMaxWidth() / photoDimensionHolder.getMaxHeight();
-//        if (image.getWidth() > photoDimensionHolder.getMaxWidth() || image.getHeight() > photoDimensionHolder.getMaxHeight() ||
-//                Math.abs((double) image.getWidth() / image.getHeight() - ASPECT_RATIO) > 0.1) {
-//            throw new InvalidDataFormatException("Сүрөттүн узун туурасы %d x %d болуусу зарыл!".formatted(photoDimensionHolder.getMaxWidth(), photoDimensionHolder.getMaxHeight()));
-//        }
         String originalFilename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         String filename = UUID.randomUUID() + "_" + originalFilename;
         String extension = StringUtils.getFilenameExtension(originalFilename);
-        Path filePath = Paths.get(loadPath, filename);
+        String separator = File.separator;
 
-        File uploadDire = new File(loadPath);
-        if (!uploadDire.exists())
-            uploadDire.mkdirs();
+        Path filePath = Paths.get("classpath://" +loadPath.replaceAll("/",separator), filename);
 
-        BufferedImage resizedImage = resizeImageWithWhiteBackground(image,photoDimensionHolder);
+        // Создание директории, если ее нет
+        Files.createDirectories(filePath.getParent());
 
-        ImageIO.write(resizedImage,extension,filePath.toFile());
+        BufferedImage resizedImage = resizeImageWithWhiteBackground(image, photoDimensionHolder);
 
+        ImageIO.write(resizedImage, extension, filePath.toFile());
 
         return filename;
+
     }
     private BufferedImage resizeImageWithWhiteBackground(BufferedImage originalImage, PhotoDimensionHolder photoDimensionHolder) throws IOException {
         // Вычисляем соотношение сторон оригинального изображения

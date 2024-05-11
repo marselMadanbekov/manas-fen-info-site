@@ -72,6 +72,7 @@ public class SurveysController {
                                  BindingResult bindingResult,
                                  Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("survey", surveysService.findById(questionCreate.surveyId()));
             model.addAttribute("payload", questionCreate);
             model.addAttribute("errors", bindingResult.getFieldErrors().stream()
                     .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage))

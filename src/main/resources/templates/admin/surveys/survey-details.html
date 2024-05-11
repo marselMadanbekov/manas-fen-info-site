@@ -35,7 +35,7 @@
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 th:text="${survey.name}"></h3>
+                        <h3 th:text="${survey?.name}"></h3>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -54,7 +54,7 @@
                                                     <input name="question" class="form-control" placeholder="Суроо"
                                                            required>
                                                     <label class="text-danger"
-                                                           th:if="${errors?.containsKey('quesiton')}"
+                                                           th:if="${errors?.containsKey('question')}"
                                                            th:text="${errors?.get('question')}"></label>
                                                 </div>
                                                 <div class="form-group">
