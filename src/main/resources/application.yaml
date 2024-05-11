@@ -8,8 +8,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/manas
     driver-class-name: org.postgresql.Driver
-    username: marselMadanbekov
-    password: madanbekovmarsel
+    username: postgres
+    password: uulkelsin
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
