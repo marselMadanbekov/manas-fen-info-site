@@ -26,6 +26,8 @@ public class User extends ParentEntity implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
+
+    @Column(unique = true)
     private String email;
 
     @Enumerated(value = EnumType.STRING)

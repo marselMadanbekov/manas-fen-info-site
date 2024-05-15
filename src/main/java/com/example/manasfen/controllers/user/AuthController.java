@@ -2,15 +2,14 @@ package com.example.manasfen.controllers.user;
 
 
 import com.example.manasfen.model.entyties.User;
-import com.example.manasfen.model.payload.LoginRequest;
 import com.example.manasfen.model.payload.UserCreate;
 import com.example.manasfen.services.users.UsersService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,8 +49,11 @@ public class AuthController {
                 session.removeAttribute("errors");
                 return "redirect:/login";
             }catch (Exception e){
-                e.printStackTrace();
-                throw e;
+                if(e instanceof DataIntegrityViolationException){
+                    return "error/user-duplicate-error";
+                }
+                else
+                    throw e;
             }
         }
     }
