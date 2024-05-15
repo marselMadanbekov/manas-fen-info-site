@@ -58,6 +58,8 @@ public class SurveysServiceImpl implements SurveysService {
     @Override
     @Transactional
     public void deleteById(Long surveyId) {
+        Survey survey = findById(surveyId);
+        surveyResultRepository.deleteSurveyResultBySurvey(survey);
         surveyRepository.deleteById(surveyId);
     }
 

@@ -58,7 +58,8 @@
                                 </div>
                             </div>
                             <div class="news_post_text">
-                                <p th:utext="${link.text.substring(0,150) + '...'}"></p>
+                                <p th:if="${link.text.length() > 150}" th:utext="${link.text.substring(0,150) + '...'}"></p>
+                                <p th:if="${link.text.length() < 150}" th:utext="${link.text}"></p>
                             </div>
                             <div class="news_post_button text-center trans_200">
                                 <a href="profile.html">Толугураак</a>

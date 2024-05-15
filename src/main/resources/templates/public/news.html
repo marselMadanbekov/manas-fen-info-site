@@ -58,7 +58,8 @@
                                 </div>
                             </div>
                             <div class="news_post_text">
-                                <p th:utext="${newe.text + '...'}"></p>
+                                <p th:if="${newe.text.length() > 150}" th:utext="${newe.text.substring(0,150) + '...'}"></p>
+                                <p th:if="${newe.text.length() < 150}" th:utext="${newe.text}"></p>
                             </div>
                             <div class="news_post_button text-center trans_200">
                                 <a  th:href="@{/news/{newsId}(newsId=${newe.id})}">Толугураак</a>
@@ -101,20 +102,6 @@
 
                 <div class="col-lg-4">
                     <div class="sidebar">
-
-                        <!-- Archives -->
-                        <div class="sidebar_section">
-                            <div class="sidebar_section_title">
-                                <h3>Сурамжылоолор</h3>
-                            </div>
-                            <ul class="sidebar_list">
-                                <li class="sidebar_list_item" th:each="survey : ${surveys}"><a
-                                        th:href="@{/surveys/{surveyId}(surveyId=${survey.id})}" th:text="${survey.name}"></a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Latest Posts -->
-
                         <div class="sidebar_section">
                             <div class="sidebar_section_title">
                                 <h3>Пайдалуу маалыматтар</h3>

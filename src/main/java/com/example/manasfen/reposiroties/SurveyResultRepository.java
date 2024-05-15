@@ -30,4 +30,9 @@ public interface SurveyResultRepository extends JpaRepository<SurveyResult, Long
     @Query("DELETE FROM SurveyResult s " +
             "WHERE s.interviewee = :user")
     void deleteSurveyResultByUser(User user);
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM SurveyResult s " +
+            "WHERE s.survey = :survey")
+    void deleteSurveyResultBySurvey(Survey survey);
 }

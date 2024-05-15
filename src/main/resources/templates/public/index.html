@@ -333,8 +333,10 @@
                                     </div>
                                     <div class="event_location" th:text="${news.subtitle}"></div>
                                     <div>
-                                        <p class="notification-text"
-                                           th:utext="${news.text + '...'}"></p>
+                                        <p th:if="${news.text.length() > 150}" class="notification-text"
+                                           th:utext="${news.text.substring(0,150) + '...'}"></p>
+                                        <p th:if="${news.text.length() < 150}" class="notification-text"
+                                           th:utext="${news.text}"></p>
                                     </div>
                                 </div>
                             </div>
