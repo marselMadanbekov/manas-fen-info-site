@@ -25,7 +25,7 @@ public class ResourceConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry) {
         resourceHandlerRegistry.addResourceHandler("/image/**")
-                .addResourceLocations("file:///Users/user/IdeaProjects/manas-fen-info-site/classpath:" + uploadDirectory);
+                .addResourceLocations("file:" + uploadDirectory);
 
         resourceHandlerRegistry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");

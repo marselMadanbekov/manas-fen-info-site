@@ -77,4 +77,10 @@ public class TeachersController {
             }
         }
     }
+
+    @PostMapping("/delete/{teacherId}")
+    public String deleteTeacher(@PathVariable("teacherId") Long teacherId){
+        usersService.deleteTeacher(teacherId);
+        return "redirect:/admin/teachers";
+    }
 }

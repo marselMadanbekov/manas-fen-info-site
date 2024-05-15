@@ -37,4 +37,8 @@ public interface UsersService {
     Teacher findTeacherByUserInfo(User user);
 
     Teacher findTeacherByUsername(String name);
+
+    void deleteTeacher(Long teacherId);
+
+    void deleteUserById(Long studentId);
 }

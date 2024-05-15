@@ -5,6 +5,7 @@ import com.example.manasfen.model.entyties.Teacher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,9 @@ public interface SurveyRepository extends JpaRepository<Survey,Long> {
     List<Survey> findFirst6ByOrderByCreateDateDesc();
 
     Page<Survey> findByTargetTeachers(Teacher teacher, Pageable pageable);
+
+
+    @Query("SELECT s FROM Survey s " +
+            "WHERE :teacher MEMBER OF s.targetTeachers")
+    List<Survey> findAllByTargetTeachers(Teacher teacher);
 }

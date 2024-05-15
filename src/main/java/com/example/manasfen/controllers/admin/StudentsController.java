@@ -40,4 +40,10 @@ public class StudentsController {
         model.addAttribute("student", usersService.findUserById(studentId));
         return "/admin/students/student-details";
     }
+
+    @PostMapping("/delete/{studentId}")
+    public String deleteStudent(@PathVariable("studentId") Long studentId){
+        usersService.deleteUserById(studentId);
+        return "redirect:/admin/students";
+    }
 }

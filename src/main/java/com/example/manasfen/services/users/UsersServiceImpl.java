@@ -3,11 +3,14 @@ package com.example.manasfen.services.users;
 
 import com.example.manasfen.exceptions.InvalidDataFormatException;
 import com.example.manasfen.model.entyties.Survey;
+import com.example.manasfen.model.entyties.SurveyResult;
 import com.example.manasfen.model.entyties.Teacher;
 import com.example.manasfen.model.entyties.User;
 import com.example.manasfen.model.enums.Role;
 import com.example.manasfen.model.payload.TeacherCreate;
 import com.example.manasfen.model.payload.UserCreate;
+import com.example.manasfen.reposiroties.SurveyRepository;
+import com.example.manasfen.reposiroties.SurveyResultRepository;
 import com.example.manasfen.reposiroties.TeacherRepository;
 import com.example.manasfen.reposiroties.UserRepository;
 import com.example.manasfen.services.photo.ArticlesPhotoDimensionHolder;
@@ -30,6 +33,8 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
+    private final SurveyRepository surveyRepository;
+    private final SurveyResultRepository surveyResultRepository;
     @Value("${custom.parameters.teachers.page-size}")
     private Integer pageSize;
     private final ArticlesPhotoDimensionHolder articlesPhotoDimensionHolder;
@@ -136,5 +141,25 @@ public class UsersServiceImpl implements UsersService {
         User user = findUserByUsername(name);
 
         return findTeacherByUserInfo(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteTeacher(Long teacherId) {
+        Teacher teacher = findTeacherById(teacherId);
+        List<Survey> surveys = surveyRepository.findAllByTargetTeachers(teacher);
+        surveyResultRepository.deleteSurveyResultByTeacher(teacher);
+        surveys.forEach(survey -> {
+            survey.removeTeacher(teacher);
+        });
+        teacherRepository.deleteById(teacherId);
+    }
+
+    @Transactional
+    @Override
+    public void deleteUserById(Long studentId) {
+        User user = findUserById(studentId);
+        surveyResultRepository.deleteSurveyResultByUser(user);
+        userRepository.deleteById(studentId);
     }
 }
