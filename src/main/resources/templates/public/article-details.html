@@ -35,7 +35,7 @@
     <div class="news">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
 
                     <div class="news_post_container">
                         <!-- News Post -->
@@ -155,51 +155,51 @@
 
                 <!-- Sidebar Column -->
 
-                <div class="col-lg-4">
-                    <div class="sidebar">
+<!--                <div class="col-lg-4">-->
+<!--                    <div class="sidebar">-->
 
-                        <!-- Archives -->
-                        <!-- Archives -->
-                        <div class="sidebar_section">
-                            <div class="sidebar_section_title">
-                                <h3>Сурамжылоолор</h3>
-                            </div>
-                            <ul class="sidebar_list">
-                                <li class="sidebar_list_item" th:each="survey : ${surveys}"><a
-                                        th:href="@{/surveys/{surveyId}(surveyId=${survey.id})}" th:text="${survey.name}"></a></li>
-                            </ul>
-                        </div>
+<!--                        &lt;!&ndash; Archives &ndash;&gt;-->
+<!--                        &lt;!&ndash; Archives &ndash;&gt;-->
+<!--                        <div class="sidebar_section">-->
+<!--                            <div class="sidebar_section_title">-->
+<!--                                <h3>Сурамжылоолор</h3>-->
+<!--                            </div>-->
+<!--                            <ul class="sidebar_list">-->
+<!--                                <li class="sidebar_list_item" th:each="survey : ${surveys}"><a-->
+<!--                                        th:href="@{/surveys/{surveyId}(surveyId=${survey.id})}" th:text="${survey.name}"></a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
 
-                        <!-- Latest Posts -->
+<!--                        &lt;!&ndash; Latest Posts &ndash;&gt;-->
 
-                        <div class="sidebar_section">
-                            <div class="sidebar_section_title">
-                                <h3>Мугалимдер</h3>
-                            </div>
+<!--                        <div class="sidebar_section">-->
+<!--                            <div class="sidebar_section_title">-->
+<!--                                <h3>Мугалимдер</h3>-->
+<!--                            </div>-->
 
-                            <div class="latest_posts">
+<!--                            <div class="latest_posts">-->
 
-                                <!-- Latest Post -->
-                                <div class="latest_post" th:each="teacher : ${teachers}">
-                                    <div class="latest_post_image">
-                                        <img th:src="'/image/' + ${teacher.photo}" alt="">
-                                    </div>
-                                    <div class="latest_post_title"><a th:href="@{/teachers/{teacherId}(teacherId=${teacher.id})}" th:text="${teacher.fullName()}"></a></div>
-                                    <div class="latest_post_meta">
-                                        <span class="latest_post_author"><a href="#" th:text="${teacher.degree}"></a></span>
-                                    </div>
-                                </div>
+<!--                                &lt;!&ndash; Latest Post &ndash;&gt;-->
+<!--                                <div class="latest_post" th:each="teacher : ${teachers}">-->
+<!--                                    <div class="latest_post_image">-->
+<!--                                        <img th:src="'/image/' + ${teacher.photo}" alt="">-->
+<!--                                    </div>-->
+<!--                                    <div class="latest_post_title"><a th:href="@{/teachers/{teacherId}(teacherId=${teacher.id})}" th:text="${teacher.fullName()}"></a></div>-->
+<!--                                    <div class="latest_post_meta">-->
+<!--                                        <span class="latest_post_author"><a href="#" th:text="${teacher.degree}"></a></span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                            </div>
+<!--                            </div>-->
 
-                        </div>
+<!--                        </div>-->
 
-                        <!-- Tags -->
+<!--                        &lt;!&ndash; Tags &ndash;&gt;-->
 
-                        <div th:replace="~{public/layout/layout::linksSidebar}"></div>
+<!--                        <div th:replace="~{public/layout/layout::linksSidebar}"></div>-->
 
-                    </div>
-                </div>
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
