@@ -41,7 +41,7 @@
                                             <p class="card-title">Суроонун статистикасы:</p>
                                             <h2 class="text-primary" th:text="${question}">фваы</h2>
                                             <p th:text="'Жалпы жооп берүүлөр: ' + ${results.size()}">фвафыв</p>
-                                            <h4 class="text-black" th:text="'Орточо баа : ' + ${mainStat.getOrDefault(question,0)}">Кандай</h4>
+                                            <h4 class="text-black" th:text="'Орточо баа : ' + ${#numbers.formatDecimal(mainStat.getOrDefault(question, 0), 1, 2, 'POINT')}">Кандай</h4>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-xl-9">
