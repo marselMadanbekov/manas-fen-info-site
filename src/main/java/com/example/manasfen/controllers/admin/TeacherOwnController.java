@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,11 +44,24 @@ public class TeacherOwnController {
 
         Teacher teacher = usersService.findTeacherByUsername(principal.getName());
         Survey survey = surveysService.findById(surveyId);
+        Map<String, Double> generalStatByQuestion = new HashMap<>();
+        for (String question : survey.getQuestions()) {
+            int sum = 0;
+            int count = 0;
+            for (String statQuestion : stats.keySet()) {
+                if (statQuestion.startsWith(question)) {
+                    sum += stats.get(statQuestion);
+                    count++;
+                }
+            }
+            generalStatByQuestion.put(question, ((double) sum / count));
+        }
         List<SurveyResult> results = surveysService.findSurveyResultsByTeacherAndSurvey(teacher,survey);
         model.addAttribute("results",results);
         model.addAttribute("teacher", teacher);
         model.addAttribute("survey", survey);
         model.addAttribute("stats", stats);
+        model.addAttribute("mainStat", generalStatByQuestion);
 
         return "admin/teacher/surveys/survey-stats";
 

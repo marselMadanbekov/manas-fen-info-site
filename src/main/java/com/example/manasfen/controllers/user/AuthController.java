@@ -43,7 +43,6 @@ public class AuthController {
             return "redirect:/?errors=1#register";
         } else {
             try {
-
                 User user = usersService.createUser(userCreate);
                 session.removeAttribute("payload");
                 session.removeAttribute("errors");

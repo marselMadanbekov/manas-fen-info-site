@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -47,11 +48,25 @@ public class SurveysController {
 
         Teacher teacher = usersService.findTeacherById(teacherId);
         Survey survey = surveysService.findById(surveyId);
-        List<SurveyResult> results = surveysService.findSurveyResultsByTeacherAndSurvey(teacher,survey);
-        model.addAttribute("results",results);
+
+        Map<String, Double> generalStatByQuestion = new HashMap<>();
+        for (String question : survey.getQuestions()) {
+            int sum = 0;
+            int count = 0;
+            for (String statQuestion : stats.keySet()) {
+                if (statQuestion.startsWith(question)) {
+                    sum += stats.get(statQuestion);
+                    count++;
+                }
+            }
+            generalStatByQuestion.put(question, ((double) sum / count));
+        }
+        List<SurveyResult> results = surveysService.findSurveyResultsByTeacherAndSurvey(teacher, survey);
+        model.addAttribute("results", results);
         model.addAttribute("teacher", teacher);
         model.addAttribute("survey", survey);
         model.addAttribute("stats", stats);
+        model.addAttribute("mainStat", generalStatByQuestion);
 
         return "admin/surveys/survey-stats";
 
@@ -66,11 +81,13 @@ public class SurveysController {
         model.addAttribute("allExistsTeachers", allTeachers);
         return "admin/surveys/survey-details";
     }
+
     @PostMapping("/delete/{surveyId}")
-    public String deleteNews(@PathVariable("surveyId") Long surveyId){
+    public String deleteNews(@PathVariable("surveyId") Long surveyId) {
         surveysService.deleteById(surveyId);
         return "redirect:/admin/surveys";
     }
+
     @PostMapping("/create-question")
     public String createQuestion(@Valid QuestionCreate questionCreate,
                                  BindingResult bindingResult,

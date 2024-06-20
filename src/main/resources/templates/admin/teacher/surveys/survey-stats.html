@@ -41,6 +41,7 @@
                                             <p class="card-title">Суроонун статистикасы:</p>
                                             <h2 class="text-primary" th:text="${question}"></h2>
                                             <p th:text="'Жалпы жооп берүүлөр: ' + ${results.size()}"></p>
+                                            <h4 class="text-black" th:text="'Орточо баа : ' + ${mainStat.getOrDefault(question,0)}">Кандай</h4>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-xl-9">
